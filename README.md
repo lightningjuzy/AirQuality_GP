@@ -46,3 +46,58 @@ c_{31}K & c_{32}K & c_{33}K \\
 $$
 
 The covariance matrix C is a symmetric matrix where the diagonal terms are 1 but the rest of the terms represent the correlation between the 3 datasets that we are training our model on. We take the kronecker product of this C matrix with the kernel from the combined_kernel function to obtain the overall kernel. 
+
+### Defining Posterior
+We will be building the posterior with the assumption that the training data has noise. By definition, the training and test data is again a GP which can be partitioned as follows:
+
+$$
+\left[\begin{array}{c}
+\mathbf{X_{train}}\\
+\mathbf{X_{test}}
+\end{array}\right]\sim\mathcal{N}\left( 0, \begin{bmatrix}
+\mathbf{C_{y}} & \mathbf{R}\\
+\mathbf{R}^{T} & \mathbf{C^{*}}
+\end{bmatrix}\right)
+$$
+
+where $C_{y} = C + {\sigma_y}^2 I_N$ is the covariance matrix on the training data, and $\sigma_y$ is the noise term associated with the training data. $R$ is the cross covariance matrx on training and test data, and $C^{*}$ is the covariance matrix on the test data. 
+
+We will then use these matrices to calculate the mean and covariance as follows:
+
+$$
+\mu_s = R^{T}{C_{y}}^{-1}t \\
+cov_s = C^{*} - R^{T}C^{-1}R
+$$
+
+where $t$ is the observed training output.
+
+## Hyperparameter Optimzation
+We will be using maximum log likelihood to do the hyperparameter inference. The log likelihood is as given in equation 5.8 in the Rasmussen textbook.
+
+$$
+\log p(\mathbf{y}|\mathbf{X},\theta) = -\frac{1}{2}\mathbf{y}^TK_y^{-1}\mathbf{y} - \frac{1}{2}\log|K_y| - \frac{n}{2}\log 2\pi,
+\tag{5.8}
+$$
+
+To set the hyperparameters by maximizing the marginal likelihood, we seek the partial derivatives of the marginal likelihood w.r.t. the hyperparameters. From Rasmussen textbook, chapter 5, equation 5.9:
+
+$$
+\frac{\partial}{\partial\theta_j}\log p(\mathbf{y}|\mathbf{X},\theta) = \frac{1}{2}\mathbf{y}^TK^{-1}\frac{\partial K}{\partial\theta_j}K^{-1}\mathbf{y} - \frac{1}{2}\text{tr}\left(K^{-1}\frac{\partial K}{\partial\theta_j}\right)
+= \frac{1}{2}\text{tr}\left((\boldsymbol{\alpha\alpha}^T - K^{-1})\frac{\partial K}{\partial\theta_j}\right) \quad \text{where} \quad \boldsymbol{\alpha} = K^{-1}\mathbf{y}. \tag{5.9}
+$$
+
+For the purposes of this project, we will be passing the log likelihood into the scipy.optimize.minimize to run an in-built gradient optimization and return the optimized hyperparameters.
+
+## Results
+As seen in the plots below, the prediction follows the trends of the test data very well. Despite the scale difference and the slightly different trend patterns, the GP model is able to cpature the trendline characteristics of each of the three pollutants very well.
+
+![alt text](images/Combined_Prediction.png "Combined Prediction")
+
+![alt text](images/CO2_Solo_Prediction.png "CO2 Prediction")
+
+![alt text](images/N2O_Solo_Prediction.png "N2O Prediction")
+
+![alt text](images/SF6_Solo_Prediction.png "SF6 Prediction")
+
+## Conclusion
+This project shows the application of a multi-task GP model for the task of prediction. We are able to use a single input (year) to generate multiple outputs (three different pollutant concentrations). GP models are very effective in running such predictions where there is a clear covariance between the different inputs. However, the limitation is that the model may not do well in instances where there is no clear correlation between the input and output. In such cases, different learning techniques would need to be used to draw proper conclusions regarding the trends in the dataset.
