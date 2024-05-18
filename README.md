@@ -93,11 +93,11 @@ As seen in the plots below, the prediction follows the trends of the test data v
 
 ![alt text](images/Combined_Prediction.png "Combined Prediction")
 
-![alt text](images/CO2_Solo_Prediction.png "CO2 Prediction")
+![alt text](images/CO2_Prediction.png "CO2 Prediction")
 
-![alt text](images/N2O_Solo_Prediction.png "N2O Prediction")
+![alt text](images/N2O_Prediction.png "N2O Prediction")
 
-![alt text](images/SF6_Solo_Prediction.png "SF6 Prediction")
+![alt text](images/SF6_Prediction.png "SF6 Prediction")
 
 ## Conclusion
 This project shows the application of a multi-task GP model for the task of prediction. We are able to use a single input (year) to generate multiple outputs (three different pollutant concentrations). GP models are very effective in running such predictions where there is a clear covariance between the different inputs. However, the limitation is that the model may not do well in instances where there is no clear correlation between the input and output. In such cases, different learning techniques would need to be used to draw proper conclusions regarding the trends in the dataset.
