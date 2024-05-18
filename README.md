@@ -7,9 +7,11 @@ Building the GP Model constitutes defining the kernels and the posterior. We wil
 From the data trend above, we observe that there is a gentle increasing trend in the data points. But there is also a local periodic fluctuation throughout the dataset. The period of the fluctuation is one year. Hence, we would need kernels to account for both the increasing and the periodic trends.
 
 With reference from the Rasmussen, we will first use the squared exponential (SE) covariance kernel from equation (5.15) as shown here:
+
 $$
 k_1(x, x') = {\theta_1}^2\exp\left(- \frac{{(x - x')^2}}{{2{\theta_2}^2}}\right) \tag{5.15}
 $$
+
 This term will account for the general gradually increasing exponential trend of the dataset.
 
 Now, for the periodic pattern, we will implement the second kernel as defined in equation (5.16) with the sinusoidal component included and a decay term. The period has been set to one year.
