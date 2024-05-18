@@ -3,6 +3,10 @@ The aim of the project is to design a multi-task gaussian process model to be ma
 
 ![alt text](images/CO2_DataViz.png "CO2 Dataset")
 
+![alt text](images/N2O_DataViz.png "N2O Dataset")
+
+![alt text](images/SF6_DataViz.png "SF6 Dataset")
+
 ## Building the GP Model
 Building the GP Model constitutes defining the kernels and the posterior. We will be using the kernels defined by Rassmussen in his textbook to make our kernels.
 ### Defining the Kernel
