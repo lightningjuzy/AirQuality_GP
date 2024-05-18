@@ -1,7 +1,7 @@
 # Multi-Task Gaussian Process Modelling for Air Quality Prediction
 The aim of the project is to design a multi-task gaussian process model to be make predictions of the concentrations of the global $CO_{2}$, $N_{2}O$ and $SF_{6}$ concentrations. The data of concentrations from the year 2002 to 2022 is being used as the training set and the data from 2022 to 2023 forms the test set. 
 
-![alt text](images\CO2_DataViz.png "CO2 Dataset")
+![alt text](images/CO2_DataViz.png "CO2 Dataset")
 
 ## Building the GP Model
 Building the GP Model constitutes defining the kernels and the posterior. We will be using the kernels defined by Rassmussen in his textbook to make our kernels.
