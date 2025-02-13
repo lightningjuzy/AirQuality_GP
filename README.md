@@ -18,7 +18,9 @@ From the data trend, we observe that there is a gentle increasing trend in the d
 With reference from the Rasmussen, we will first use the squared exponential (SE) covariance kernel from equation (5.15) as shown here:
 
 $$
-k_{1}\left(x, x'\right) = {\theta_1}^2\exp\left(- \frac{{(x - x')^2}}{{2{\theta_2}^2}}\right) \tag{5.15}
+\begin{equation}
+k_{1}\left(x, x'\right) = {\theta_1}^2\exp\left(- \frac{{(x - x')^2}}{{2{\theta_2}^2}}\right) 
+\end{equation} \tag{5.15}
 $$
 
 This term will account for the general gradually increasing exponential trend of the dataset.
