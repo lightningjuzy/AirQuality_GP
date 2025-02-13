@@ -19,7 +19,7 @@ With reference from the Rasmussen, we will first use the squared exponential (SE
 
 $$
 \begin{equation}
-k_{1}\left(x, x'\right) = {\theta_1}^2\exp\left(- \frac{{(x - x')^2}}{{2{\theta_2}^2}}\right) 
+k_{1}\left(x, x'\right) = {\theta_1}^2\exp\left(- \frac{(x - x')^2}{2{\theta_2}^2}\right) 
 \end{equation} \tag{5.15}
 $$
 
