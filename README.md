@@ -62,7 +62,9 @@ where $C_{y} = C + {\sigma_y}^2 I_N$ is the covariance matrix on the training da
 We will then use these matrices to calculate the mean and covariance as follows:
 
 $$
-\mu_s = R^{T}{C_{y}}^{-1}t \\\\
+\mu_s = R^{T}{C_{y}}^{-1}t
+$$
+$$
 cov_s = C^{*} - R^{T}C^{-1}R
 $$
 
