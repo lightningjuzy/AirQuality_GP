@@ -17,21 +17,17 @@ From the data trend, we observe that there is a gentle increasing trend in the d
 
 With reference from the Rasmussen, we will first use the squared exponential (SE) covariance kernel from equation (5.15) as shown here:
 
-![alt text ><](images/EQN_515.png "Equation 5.15")
+![alt text](images/EQN_515.png "Equation 5.15")
 
 This term will account for the general gradually increasing exponential trend of the dataset.
 
 Now, for the periodic pattern, we will implement the second kernel as defined in equation (5.16) with the sinusoidal component included and a decay term. The period has been set to one year.
 
-$$
-k_2(x, x') = {\theta_3}^2\exp\left(- \frac{{(x - x')^2}}{{2{\theta_4}^2}} - \frac{2\sin^2(\pi(x - x'))} {{\theta_5}^2}\right) \tag{5.16}
-$$
+![alt text](images/EQN_516.png "Equation 5.16")
 
 We will also include a third rational quadratic kernel to account for small to medium irregularities within each period using equation (5.17).
 
-$$
-k_3(x, x') = {\theta_6}^2\left(1 + \frac{(x - x')^2}{2\theta_8{\theta_7}^2}\right)^{-\theta_8} \tag{5.17}
-$$
+![alt text](images/EQN_517.png "Equation 5.17")
 
 $\theta_1$, $\theta_2$, $\theta_3$, $\theta_4$, $\theta_5$, $\theta_6$, $\theta_7$, $\theta_8$ are hyperparameters to be optimized.
 ### Kronecker Product Kernel
@@ -66,7 +62,7 @@ where $C_{y} = C + {\sigma_y}^2 I_N$ is the covariance matrix on the training da
 We will then use these matrices to calculate the mean and covariance as follows:
 
 $$
-\mu_s = R^{T}{C_{y}}^{-1}t \\
+\mu_s = R^{T}{C_{y}}^{-1}t \\\\
 cov_s = C^{*} - R^{T}C^{-1}R
 $$
 
@@ -75,17 +71,11 @@ where $t$ is the observed training output.
 ## Hyperparameter Optimzation
 We will be using maximum log likelihood to do the hyperparameter inference. The log likelihood is as given in equation 5.8 in the Rasmussen textbook.
 
-$$
-\log p(\mathbf{y}|\mathbf{X},\theta) = -\frac{1}{2}\mathbf{y}^TK_y^{-1}\mathbf{y} - \frac{1}{2}\log|K_y| - \frac{n}{2}\log 2\pi,
-\tag{5.8}
-$$
+![alt text](images/EQN_58.png "Equation 5.8")
 
 To set the hyperparameters by maximizing the marginal likelihood, we seek the partial derivatives of the marginal likelihood w.r.t. the hyperparameters. From Rasmussen textbook, chapter 5, equation 5.9:
 
-$$
-\frac{\partial}{\partial\theta_j}\log p(\mathbf{y}|\mathbf{X},\theta) = \frac{1}{2}\mathbf{y}^TK^{-1}\frac{\partial K}{\partial\theta_j}K^{-1}\mathbf{y} - \frac{1}{2}\text{tr}\left(K^{-1}\frac{\partial K}{\partial\theta_j}\right)
-= \frac{1}{2}\text{tr}\left((\boldsymbol{\alpha\alpha}^T - K^{-1})\frac{\partial K}{\partial\theta_j}\right) \quad \text{where} \quad \boldsymbol{\alpha} = K^{-1}\mathbf{y}. \tag{5.9}
-$$
+![alt text](images/EQN_59.png "Equation 5.9")
 
 For the purposes of this project, we will be passing the log likelihood into the scipy.optimize.minimize to run an in-built gradient optimization and return the optimized hyperparameters.
 
