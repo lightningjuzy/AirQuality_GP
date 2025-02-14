@@ -17,7 +17,7 @@ From the data trend, we observe that there is a gentle increasing trend in the d
 
 With reference from the Rasmussen, we will first use the squared exponential (SE) covariance kernel from equation (5.15) as shown here:
 
-![alt text](images/EQN_515.png "Equation 5.15")
+![alt text ><](images/EQN_515.png "Equation 5.15")
 
 This term will account for the general gradually increasing exponential trend of the dataset.
 
