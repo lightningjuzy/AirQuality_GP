@@ -22,6 +22,7 @@ $$
 k_{1}\left(x, x'\right) = {\theta_1}^2\exp\left(- \frac{(x - x')^2}{2{\theta_2}^2}\right) 
 \end{equation} \tag{5.15}
 $$
+![alt text](images/EQN_515.png "Equation 5.15")
 
 This term will account for the general gradually increasing exponential trend of the dataset.
 
